@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hobby_lobby_flutter/animations/FadeAnimation.dart';
-import 'package:hobby_lobby_flutter/components/MyFlatButton.dart';
 import 'package:hobby_lobby_flutter/components/authentication/LoginScreen.dart';
 import 'package:hobby_lobby_flutter/components/authentication/TwoPeopleSeating.dart';
 
@@ -12,9 +11,10 @@ class AuthenticationScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Padding(
-              padding: EdgeInsets.only(left: 40, top: 40),
+              padding: const EdgeInsets.only(top: 40, left: 40),
               child: Align(
                 alignment: Alignment.topLeft,
                 child: Text(
@@ -26,70 +26,99 @@ class AuthenticationScreen extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(top: 60),
-              child: Hero(
-                tag: 'boot_illustration',
-                child: SizedBox(
-                    width: 350, height: 320, child: TwoPeopleSeating()),
+            Hero(
+              tag: 'boot_illustration',
+              child: SizedBox(
+                width: 350,
+                height: 320,
+                child: TwoPeopleSeating(),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(top: 5),
-              child: FadeAnimation(
-                delay: 3,
-                child: Text(
-                  'Find people who share your interests.',
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 16,
-                  ),
+            FadeAnimation(
+              delay: 3,
+              child: Text(
+                'Find people who share your interests.',
+                style: TextStyle(
+                  color: Colors.grey,
+                  fontSize: 16,
                 ),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(top: 50),
-              child: FadeAnimation(
-                delay: 1.1,
-                startY: 100,
-                child: Hero(
-                  tag: 'log_in_button',
-                  child: MyFlatButton(
-                    text: 'LOG IN',
-                    fontSize: 16,
-                    horizontalPadding: 130,
-                    verticalPadding: 20,
-                    textColor: Colors.white,
-                    backgroundColor: Colors.green,
-                    borderRadius: 40,
-                    onClick: () => Navigator.push(
-                      context,
-                      PageRouteBuilder(
-                        transitionDuration: Duration(seconds: 2),
-                        pageBuilder: (_, __, ___) => LoginScreen(),
+            Container(
+              padding: EdgeInsets.only(left: 40, right: 40, bottom: 40),
+              constraints: BoxConstraints(maxWidth: 500),
+              child: Column(
+                children: [
+                  FadeAnimation(
+                    delay: 1.1,
+                    startY: 100,
+                    child: SizedBox(
+                      width: double.maxFinite,
+                      child: Hero(
+                        tag: 'LOG IN',
+                        child: TextButton(
+                          onPressed: () => Navigator.push(
+                            context,
+                            PageRouteBuilder(
+                              transitionDuration: Duration(seconds: 2),
+                              pageBuilder: (_, __, ___) =>
+                                  LoginScreen('LOG IN'),
+                            ),
+                          ),
+                          child: Text(
+                            'LOG IN',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.white,
+                            ),
+                          ),
+                          style: TextButton.styleFrom(
+                            backgroundColor: Colors.green,
+                            padding: EdgeInsets.symmetric(vertical: 20),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(40),
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                ),
+                  SizedBox(
+                    width: double.maxFinite,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 20),
+                      child: Hero(
+                        tag: 'SIGN UP',
+                        child: TextButton(
+                          onPressed: () => Navigator.push(
+                            context,
+                            PageRouteBuilder(
+                              transitionDuration: Duration(seconds: 2),
+                              pageBuilder: (_, __, ___) =>
+                                  LoginScreen('SIGN UP'),
+                            ),
+                          ),
+                          child: Text(
+                            'SIGN UP',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.white,
+                            ),
+                          ),
+                          style: TextButton.styleFrom(
+                            backgroundColor: Colors.blue,
+                            padding: EdgeInsets.symmetric(vertical: 20),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(40),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(top: 20),
-              child: FadeAnimation(
-                delay: 1.2,
-                startY: 100,
-                child: MyFlatButton(
-                  text: 'SIGN UP',
-                  fontSize: 16,
-                  horizontalPadding: 130,
-                  verticalPadding: 20,
-                  textColor: Colors.white,
-                  backgroundColor: Colors.blue,
-                  borderRadius: 40,
-                  onClick: () {},
-                ),
-              ),
-            )
           ],
         ),
       ),

@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:hobby_lobby_flutter/animations/FadeAnimation.dart';
 
 class LoginScreen extends StatelessWidget {
+  final String screenType;
+
+  LoginScreen(this.screenType);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,7 +18,7 @@ class LoginScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'LOG IN',
+                this.screenType,
                 style: TextStyle(
                   fontSize: 50,
                   color: Colors.black,
@@ -103,11 +107,11 @@ class LoginScreen extends StatelessWidget {
                           padding:
                               const EdgeInsets.only(top: 50.0, bottom: 20.0),
                           child: Hero(
-                            tag: 'log_in_button',
+                            tag: this.screenType,
                             child: TextButton(
                               onPressed: () {},
                               child: Text(
-                                'LOG IN',
+                                this.screenType,
                                 style: TextStyle(
                                   fontSize: 16,
                                   color: Colors.white,
@@ -148,7 +152,12 @@ class LoginScreen extends StatelessWidget {
                 child: Row(
                   children: [
                     Text(
-                      'Don\'t have an account?  ',
+                      (() {
+                        if (this.screenType == 'LOG IN') {
+                          return 'Don\'t have an account?  ';
+                        }
+                        return 'Already have an account?  ';
+                      })(),
                       style: TextStyle(
                         fontSize: 15,
                         color: Colors.black,
@@ -156,9 +165,25 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () => {
+                        Navigator.pushReplacement(
+                          context,
+                          PageRouteBuilder(
+                            transitionDuration: Duration(seconds: 2),
+                            pageBuilder: (_, __, ___) => LoginScreen(() {
+                              if (this.screenType == 'LOG IN') return 'SIGN UP';
+                              return 'LOG IN';
+                            }()),
+                          ),
+                        )
+                      },
                       child: Text(
-                        'Sign Up',
+                        (() {
+                          if (this.screenType == 'LOG IN') {
+                            return "Sign Up";
+                          }
+                          return "Log In";
+                        })(),
                         style: TextStyle(
                           fontSize: 15,
                         ),
