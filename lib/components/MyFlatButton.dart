@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class MyFlatButton extends StatelessWidget {
@@ -9,6 +8,7 @@ class MyFlatButton extends StatelessWidget {
   final Color textColor;
   final Color backgroundColor;
   final double borderRadius;
+  final Function onClick;
 
   MyFlatButton({
     required this.text,
@@ -18,12 +18,13 @@ class MyFlatButton extends StatelessWidget {
     required this.textColor,
     required this.backgroundColor,
     required this.borderRadius,
+    required this.onClick,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () {},
+      onPressed: () => this.onClick(),
       child: Text(
         this.text,
         style: TextStyle(fontSize: this.fontSize),

@@ -19,12 +19,13 @@ class BootScreen extends StatelessWidget {
             ),
           ),
           child: Column(
+            mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Align(
                 alignment: Alignment.centerLeft,
                 child: Container(
-                  margin: EdgeInsets.only(left: 40, top: 60),
+                  margin: EdgeInsets.only(left: 40, top: 40),
                   child: FadeAnimation(
                     delay: 1,
                     startX: 0.0,

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hobby_lobby_flutter/animations/FadeAnimation.dart';
 import 'package:hobby_lobby_flutter/components/MyFlatButton.dart';
+import 'package:hobby_lobby_flutter/components/authentication/LoginScreen.dart';
 import 'package:hobby_lobby_flutter/components/authentication/TwoPeopleSeating.dart';
 
 class AuthenticationScreen extends StatelessWidget {
@@ -13,7 +14,7 @@ class AuthenticationScreen extends StatelessWidget {
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.only(left: 40, top: 60),
+              padding: EdgeInsets.only(left: 40, top: 40),
               child: Align(
                 alignment: Alignment.topLeft,
                 child: Text(
@@ -51,14 +52,24 @@ class AuthenticationScreen extends StatelessWidget {
               child: FadeAnimation(
                 delay: 1.1,
                 startY: 100,
-                child: MyFlatButton(
-                  text: 'LOG IN',
-                  fontSize: 16,
-                  horizontalPadding: 130,
-                  verticalPadding: 20,
-                  textColor: Colors.white,
-                  backgroundColor: Colors.green,
-                  borderRadius: 40,
+                child: Hero(
+                  tag: 'log_in_button',
+                  child: MyFlatButton(
+                    text: 'LOG IN',
+                    fontSize: 16,
+                    horizontalPadding: 130,
+                    verticalPadding: 20,
+                    textColor: Colors.white,
+                    backgroundColor: Colors.green,
+                    borderRadius: 40,
+                    onClick: () => Navigator.push(
+                      context,
+                      PageRouteBuilder(
+                        transitionDuration: Duration(seconds: 2),
+                        pageBuilder: (_, __, ___) => LoginScreen(),
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -75,6 +86,7 @@ class AuthenticationScreen extends StatelessWidget {
                   textColor: Colors.white,
                   backgroundColor: Colors.blue,
                   borderRadius: 40,
+                  onClick: () {},
                 ),
               ),
             )
