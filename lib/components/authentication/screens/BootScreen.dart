@@ -44,10 +44,17 @@ class BootScreen extends StatelessWidget {
                 padding: EdgeInsets.only(top: 230),
                 child: Hero(
                   tag: 'boot_illustration',
-                  child: SizedBox(
-                      width: 350,
-                      height: 320,
-                      child: TwoPeopleSeatingIllustration()),
+                  child: Container(
+                    constraints: BoxConstraints(maxHeight: 320),
+                    child: LayoutBuilder(
+                      builder: (context, constraints) {
+                        return SizedBox(
+                            width: 350,
+                            height: 320,
+                            child: TwoPeopleSeatingIllustration());
+                      },
+                    ),
+                  ),
                 ),
               )
             ],
