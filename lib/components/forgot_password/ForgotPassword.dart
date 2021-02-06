@@ -1,6 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:hobby_lobby_flutter/animations/FadeAnimation.dart';
+import 'package:hobby_lobby_flutter/components/forgot_password/animated_illustrations/WomanLockIllustration.dart';
 
 class ForgotPassword extends StatelessWidget {
   @override
@@ -19,15 +21,23 @@ class ForgotPassword extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                ForgotPasswordMessage(),
+                FadeAnimation(delay: 1, child: ForgotPasswordMessage()),
                 Padding(
                   padding: const EdgeInsets.only(top: 25),
                   child: Column(
                     children: [
-                      EmailResetWidget(),
+                      FadeAnimation(
+                        delay: 5,
+                        startY: 10,
+                        child: EmailResetWidget(),
+                      ),
                       Padding(
                         padding: const EdgeInsets.only(top: 15),
-                        child: SMSResetWidget(),
+                        child: FadeAnimation(
+                          delay: 4.5,
+                          startY: 10,
+                          child: SMSResetWidget(),
+                        ),
                       ),
                     ],
                   ),
@@ -51,12 +61,17 @@ class ForgotPasswordMessage extends StatelessWidget {
     return Column(
       children: [
         Container(
-          constraints:
-              BoxConstraints(maxHeight: MediaQuery.of(context).size.height / 3),
-          child: Image.asset(
-            'assets/icons/Forgot Password Icon.png',
-          ),
-        ),
+            constraints: BoxConstraints(
+                maxHeight: MediaQuery.of(context).size.height / 3 + 30,
+                maxWidth:
+                    (MediaQuery.of(context).size.height / 3 + 30) * 0.84963),
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                return WomanLockIllustration(
+                    parentHeight: constraints.maxHeight,
+                    parentWidth: constraints.maxWidth);
+              },
+            )),
         Padding(
           padding: const EdgeInsets.only(top: 15.0),
           child: Text(
