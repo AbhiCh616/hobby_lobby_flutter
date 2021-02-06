@@ -31,7 +31,12 @@ class AuthenticationScreen extends StatelessWidget {
               child: SizedBox(
                 width: 350,
                 height: 320,
-                child: TwoPeopleSeating(),
+                child: LayoutBuilder(builder: (context, constraints) {
+                  return TwoPeopleSeating(
+                    height: constraints.maxHeight,
+                    width: constraints.maxWidth,
+                  );
+                }),
               ),
             ),
             FadeAnimation(

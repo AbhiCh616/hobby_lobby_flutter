@@ -51,7 +51,13 @@ class BootScreen extends StatelessWidget {
                         return SizedBox(
                             width: 350,
                             height: 320,
-                            child: TwoPeopleSeatingIllustration());
+                            child:
+                                LayoutBuilder(builder: (context, constraints) {
+                              return TwoPeopleSeatingIllustration(
+                                height: constraints.maxHeight,
+                                width: constraints.maxWidth,
+                              );
+                            }));
                       },
                     ),
                   ),
