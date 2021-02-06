@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hobby_lobby_flutter/animations/FadeAnimation.dart';
-import 'package:hobby_lobby_flutter/components/authentication/LoginScreen.dart';
-import 'package:hobby_lobby_flutter/components/authentication/TwoPeopleSeating.dart';
+import 'package:hobby_lobby_flutter/components/authentication/screens/LoginScreen.dart';
+import 'package:hobby_lobby_flutter/components/authentication/animated_illustrations/TwoPeopleSeating.dart';
 
 class AuthenticationScreen extends StatelessWidget {
   @override

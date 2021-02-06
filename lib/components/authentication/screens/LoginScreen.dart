@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hobby_lobby_flutter/animations/FadeAnimation.dart';
+import 'package:hobby_lobby_flutter/components/forgot_password/ForgotPassword.dart';
 
 class LoginScreen extends StatelessWidget {
   final String screenType;
@@ -133,7 +134,15 @@ class LoginScreen extends StatelessWidget {
                         child: FadeAnimation(
                           delay: 2,
                           child: TextButton(
-                            onPressed: () {},
+                            onPressed: () => {
+                              Navigator.push(
+                                context,
+                                PageRouteBuilder(
+                                  transitionDuration: Duration(seconds: 2),
+                                  pageBuilder: (_, __, ___) => ForgotPassword(),
+                                ),
+                              )
+                            },
                             child: Text(
                               'Forgot Password?',
                               style: TextStyle(
