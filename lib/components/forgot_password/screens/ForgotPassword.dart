@@ -2,7 +2,9 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:hobby_lobby_flutter/animations/FadeAnimation.dart';
+import 'package:hobby_lobby_flutter/components/forgot_password/animated_illustrations/EmailWithDoc.dart';
 import 'package:hobby_lobby_flutter/components/forgot_password/animated_illustrations/WomanLockIllustration.dart';
+import 'package:hobby_lobby_flutter/components/forgot_password/screens/EnterEmail.dart';
 
 class ForgotPassword extends StatelessWidget {
   @override
@@ -117,7 +119,13 @@ class EmailResetWidget extends StatelessWidget {
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-          onTap: () {},
+          onTap: () => Navigator.push(
+            context,
+            PageRouteBuilder(
+              transitionDuration: Duration(seconds: 2),
+              pageBuilder: (_, __, ___) => EnterEmail(),
+            ),
+          ),
           child: Container(
             child: Padding(
               padding: const EdgeInsets.all(15.0),
@@ -126,9 +134,14 @@ class EmailResetWidget extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(right: 20.0),
-                    child: Image.asset(
-                      'assets/icons/Mail Icon.png',
+                    child: SizedBox(
                       height: 40,
+                      width: 1.0677716 * 40,
+                      child: EmailWithDoc(
+                        parentHeight: 40,
+                        parentWidth: 1.0677716 * 40,
+                        showWithDoc: false,
+                      ),
                     ),
                   ),
                   Expanded(

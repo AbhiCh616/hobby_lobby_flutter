@@ -52,6 +52,7 @@ flutter:
     - assets/illustrations/
     - assets/illustrations/two_people_seating/
     - assets/illustrations/woman_lock_opening/
+    - assets/illustrations/email_with_doc/
     - assets/icons/
   #   - images/a_dot_ham.jpeg
 

@@ -7,6 +7,7 @@ enum AniProps { opacity, translateX, translateY }
 class FadeAnimation extends StatelessWidget {
   final double delay;
   final double startOpacity;
+  final double finalOpacity;
   final double startX;
   final double startY;
   final Widget child;
@@ -14,6 +15,7 @@ class FadeAnimation extends StatelessWidget {
   FadeAnimation(
       {required this.delay,
       this.startOpacity = 0.0,
+      this.finalOpacity = 1.0,
       this.startX = 0.0,
       this.startY = 0.0,
       required this.child});
@@ -21,7 +23,8 @@ class FadeAnimation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _tween = MultiTween<AniProps>()
-      ..add(AniProps.opacity, startOpacity.tweenTo(1.0), 500.milliseconds)
+      ..add(AniProps.opacity, startOpacity.tweenTo(finalOpacity),
+          500.milliseconds)
       ..add(AniProps.translateX, (startX).tweenTo(0.0), 500.milliseconds,
           Curves.easeOut)
       ..add(AniProps.translateY, (startY).tweenTo(0.0), 500.milliseconds,

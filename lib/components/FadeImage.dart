@@ -7,7 +7,8 @@ class FadeImage extends StatelessWidget {
   final double height;
   final double width;
   final double fadeDelay;
-  final double fadeOpacity;
+  final double fadeStartOpacity;
+  final double fadeEndOpacity;
   final double fadeX;
   final double fadeY;
   final String image;
@@ -18,7 +19,8 @@ class FadeImage extends StatelessWidget {
       required this.height,
       required this.width,
       required this.fadeDelay,
-      this.fadeOpacity = 0.0,
+      this.fadeStartOpacity = 0.0,
+      this.fadeEndOpacity = 1.0,
       this.fadeX = 0.0,
       this.fadeY = 0.0,
       required this.image});
@@ -32,7 +34,8 @@ class FadeImage extends StatelessWidget {
       width: this.width,
       child: FadeAnimation(
         delay: this.fadeDelay,
-        startOpacity: this.fadeOpacity,
+        startOpacity: this.fadeStartOpacity,
+        finalOpacity: this.fadeEndOpacity,
         startX: this.fadeX,
         startY: this.fadeY,
         child: Container(
