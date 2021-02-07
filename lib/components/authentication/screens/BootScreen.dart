@@ -20,7 +20,7 @@ class BootScreen extends StatelessWidget {
           ),
           child: Column(
             mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Align(
                 alignment: Alignment.centerLeft,
@@ -41,23 +41,20 @@ class BootScreen extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 230),
+                padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).size.height / 8),
                 child: Hero(
                   tag: 'boot_illustration',
-                  child: Container(
-                    constraints: BoxConstraints(maxHeight: 320),
+                  child: SizedBox(
+                    width:
+                        (MediaQuery.of(context).size.height / 2.5) * 1.149395,
+                    height: MediaQuery.of(context).size.height / 2.5,
                     child: LayoutBuilder(
                       builder: (context, constraints) {
-                        return SizedBox(
-                            width: 350,
-                            height: 320,
-                            child:
-                                LayoutBuilder(builder: (context, constraints) {
-                              return TwoPeopleSeatingIllustration(
-                                height: constraints.maxHeight,
-                                width: constraints.maxWidth,
-                              );
-                            }));
+                        return TwoPeopleSeatingIllustration(
+                          height: constraints.maxHeight,
+                          width: constraints.maxWidth,
+                        );
                       },
                     ),
                   ),
