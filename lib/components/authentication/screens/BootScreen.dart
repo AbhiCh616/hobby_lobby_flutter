@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hobby_lobby_flutter/animations/FadeAnimation.dart';
+import 'package:hobby_lobby_flutter/components/authentication/logic/functions.dart';
 import 'package:hobby_lobby_flutter/components/authentication/screens/AuthenticationScreen.dart';
 import 'package:hobby_lobby_flutter/components/authentication/animated_illustrations/TwoPeopleSeatingIllustration.dart';
+import 'package:hobby_lobby_flutter/components/feed/feed.dart';
 
 class BootScreen extends StatelessWidget {
   @override
@@ -11,13 +13,28 @@ class BootScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: GestureDetector(
-          onTap: () => Navigator.push(
-            context,
-            PageRouteBuilder(
-              transitionDuration: Duration(seconds: 2),
-              pageBuilder: (_, __, ___) => AuthenticationScreen(),
-            ),
-          ),
+          onTap: () async => {
+            if (await isLoggedIn())
+              {
+                Navigator.pushReplacement(
+                  context,
+                  PageRouteBuilder(
+                    transitionDuration: Duration(seconds: 2),
+                    pageBuilder: (_, __, ___) => Feed(),
+                  ),
+                )
+              }
+            else
+              {
+                Navigator.pushReplacement(
+                  context,
+                  PageRouteBuilder(
+                    transitionDuration: Duration(seconds: 2),
+                    pageBuilder: (_, __, ___) => AuthenticationScreen(),
+                  ),
+                )
+              }
+          },
           child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
