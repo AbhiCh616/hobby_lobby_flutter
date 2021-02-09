@@ -1,14 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hobby_lobby_flutter/components/authentication/screens/SignupScreen.dart';
-import 'package:hobby_lobby_flutter/components/forgot_password/screens/ForgotPassword.dart';
+import 'package:hobby_lobby_flutter/components/authentication/screens/LoginScreen.dart';
 
-class LoginScreen extends StatefulWidget {
+class SignupScreen extends StatefulWidget {
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _SignupScreenState createState() => _SignupScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignupScreenState extends State<SignupScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   bool showPassword = false;
@@ -26,20 +25,11 @@ class _LoginScreenState extends State<LoginScreen> {
     });
   }
 
-  goToSignUp() {
+  goToLogIn() {
     Navigator.pushReplacement(
       context,
       PageRouteBuilder(
-        pageBuilder: (_, __, ___) => SignupScreen(),
-      ),
-    );
-  }
-
-  goToForgotPasswordScreen() {
-    Navigator.push(
-      context,
-      PageRouteBuilder(
-        pageBuilder: (_, __, ___) => ForgotPassword(),
+        pageBuilder: (_, __, ___) => LoginScreen(),
       ),
     );
   }
@@ -64,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: [
                   // Heading ('Sign up')
                   Text(
-                    'LOG IN',
+                    'SIGN UP',
                     style: TextStyle(
                       fontSize: 50,
                       fontWeight: FontWeight.bold,
@@ -158,7 +148,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               child: TextButton(
                                 onPressed: () {},
                                 child: Text(
-                                  'LOG IN',
+                                  'SIGN UP',
                                   style: TextStyle(
                                       fontSize: 16, color: Colors.white),
                                 ),
@@ -170,20 +160,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                             BorderRadius.circular(10))),
                               ),
                             ),
-                            // Forgot Password
-                            Align(
-                              alignment: Alignment.center,
-                              child: Padding(
-                                padding: const EdgeInsets.only(top: 20.0),
-                                child: TextButton(
-                                  onPressed: goToForgotPasswordScreen,
-                                  child: Text(
-                                    'Forgot Password?',
-                                    style: TextStyle(fontSize: 15),
-                                  ),
-                                ),
-                              ),
-                            ),
                           ],
                         ),
                       ),
@@ -193,7 +169,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       // 'Already have an account' text
                       Text(
-                        'Dont\'t have an account?',
+                        'Already have an account?',
                         style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
@@ -201,9 +177,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       // Go to login page button
                       TextButton(
-                          onPressed: goToSignUp,
+                          onPressed: goToLogIn,
                           child: Text(
-                            'Sign Up',
+                            'Log In',
                             style: TextStyle(
                               fontSize: 15,
                             ),
