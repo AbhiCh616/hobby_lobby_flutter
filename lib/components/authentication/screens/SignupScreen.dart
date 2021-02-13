@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hobby_lobby_flutter/components/authentication/logic/validators.dart';
 import 'package:hobby_lobby_flutter/components/authentication/screens/LoginScreen.dart';
+import 'package:hobby_lobby_flutter/components/authentication/screens/PasswordScreen.dart';
 
 class SignupScreen extends StatefulWidget {
   @override
@@ -10,19 +12,23 @@ class SignupScreen extends StatefulWidget {
 class _SignupScreenState extends State<SignupScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  bool showPassword = false;
+
+  bool isEmailCorrect = false;
+  bool isUsernameCorrect = true;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Start listening to changes.
+    emailController.addListener(validate);
+  }
 
   @override
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
-  }
-
-  changePasswordVisibility() {
-    setState(() {
-      showPassword = !showPassword;
-    });
   }
 
   goToLogIn() {
@@ -32,6 +38,25 @@ class _SignupScreenState extends State<SignupScreen> {
         pageBuilder: (_, __, ___) => LoginScreen(),
       ),
     );
+  }
+
+  validate() {
+    if (isEmailCorrect != validateEmail(emailController.text)) {
+      setState(() {
+        isEmailCorrect = !isEmailCorrect;
+      });
+    }
+  }
+
+  goToPasswordScreen() {
+    if (isEmailCorrect && isUsernameCorrect) {
+      Navigator.push(
+        context,
+        PageRouteBuilder(
+          pageBuilder: (_, __, ___) => PasswordScreen(),
+        ),
+      );
+    }
   }
 
   @override
@@ -99,54 +124,52 @@ class _SignupScreenState extends State<SignupScreen> {
                                     ),
                                     borderRadius: BorderRadius.circular(10),
                                   ),
+                                  suffixIcon: isEmailCorrect
+                                      ? Icon(
+                                          Icons.done,
+                                          color: Colors.green,
+                                        )
+                                      : null,
                                 ),
                               ),
                             ),
-                            // Heading of Password field ('Your Password')
+                            // Heading of Username field ('Create Unique Username')
                             Text(
-                              'YOUR PASSWORD',
+                              'CREATE UNIQUE USERNAME',
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            // Password field
+                            // Username field
                             Padding(
                               padding:
                                   const EdgeInsets.only(top: 20, bottom: 50),
                               child: TextFormField(
                                 controller: passwordController,
-                                obscureText: !showPassword,
-                                enableSuggestions: false,
-                                autocorrect: false,
                                 decoration: InputDecoration(
-                                    filled: true,
-                                    fillColor: Colors.grey[100],
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Colors.transparent,
-                                      ),
-                                      borderRadius: BorderRadius.circular(10),
+                                  filled: true,
+                                  fillColor: Colors.grey[100],
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.transparent,
                                     ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Colors.transparent,
-                                      ),
-                                      borderRadius: BorderRadius.circular(10),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.transparent,
                                     ),
-                                    suffixIcon: GestureDetector(
-                                      onTap: changePasswordVisibility,
-                                      child: Icon(showPassword
-                                          ? Icons.visibility
-                                          : Icons.visibility_off),
-                                    )),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
                               ),
                             ),
                             // Sign up button
                             SizedBox(
                               width: double.maxFinite,
                               child: TextButton(
-                                onPressed: () {},
+                                onPressed: goToPasswordScreen,
                                 child: Text(
                                   'SIGN UP',
                                   style: TextStyle(
