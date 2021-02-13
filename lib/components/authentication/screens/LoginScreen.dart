@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hobby_lobby_flutter/components/authentication/logic/user.dart';
 import 'package:hobby_lobby_flutter/components/authentication/screens/SignupScreen.dart';
+import 'package:hobby_lobby_flutter/components/feed/feed.dart';
 import 'package:hobby_lobby_flutter/components/forgot_password/screens/ForgotPassword.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -24,6 +26,20 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() {
       showPassword = !showPassword;
     });
+  }
+
+  logInButton() async {
+    await logIn(emailController.text, passwordController.text);
+
+    if (await isLoggedIn()) {
+      Navigator.pushAndRemoveUntil(
+        context,
+        PageRouteBuilder(
+          pageBuilder: (_, __, ___) => Feed(),
+        ),
+        ModalRoute.withName('/'),
+      );
+    }
   }
 
   goToSignUp() {
@@ -62,7 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // Heading ('Sign up')
+                  // Heading ('Log in')
                   Text(
                     'LOG IN',
                     style: TextStyle(
@@ -70,7 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  // Sign up form
+                  // Log in form
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 20.0),
                     child: Align(
@@ -152,11 +168,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                     )),
                               ),
                             ),
-                            // Sign up button
+                            // Log in button
                             SizedBox(
                               width: double.maxFinite,
                               child: TextButton(
-                                onPressed: () {},
+                                onPressed: logInButton,
                                 child: Text(
                                   'LOG IN',
                                   style: TextStyle(
@@ -191,7 +207,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   Row(
                     children: [
-                      // 'Already have an account' text
+                      // 'Don't have an account' text
                       Text(
                         'Dont\'t have an account?',
                         style: TextStyle(
@@ -199,7 +215,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      // Go to login page button
+                      // Go to signup page button
                       TextButton(
                           onPressed: goToSignUp,
                           child: Text(

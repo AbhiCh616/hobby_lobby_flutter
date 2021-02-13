@@ -13,7 +13,7 @@ class FadeAnimation extends StatelessWidget {
   final Widget child;
 
   FadeAnimation(
-      {required this.delay,
+      {this.delay = 0.0,
       this.startOpacity = 0.0,
       this.finalOpacity = 1.0,
       this.startX = 0.0,

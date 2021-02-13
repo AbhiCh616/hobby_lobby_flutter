@@ -21,6 +21,7 @@ class AuthenticationScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                // Heading ("Hello")
                 Padding(
                   padding: const EdgeInsets.only(top: 40, left: 40),
                   child: Align(
@@ -34,8 +35,10 @@ class AuthenticationScreen extends StatelessWidget {
                     ),
                   ),
                 ),
+                // Image with text
                 Column(
                   children: [
+                    // Image
                     Hero(
                       tag: 'boot_illustration',
                       child: SizedBox(
@@ -50,6 +53,7 @@ class AuthenticationScreen extends StatelessWidget {
                         }),
                       ),
                     ),
+                    // Text
                     Padding(
                       padding: const EdgeInsets.only(top: 30.0),
                       child: FadeAnimation(
@@ -65,12 +69,14 @@ class AuthenticationScreen extends StatelessWidget {
                     ),
                   ],
                 ),
+                // Buttons
                 Container(
                   padding:
                       EdgeInsets.only(top: 20, left: 40, right: 40, bottom: 40),
                   constraints: BoxConstraints(maxWidth: 500),
                   child: Column(
                     children: [
+                      // Log In Button
                       FadeAnimation(
                         delay: 1.1,
                         startY: 100,
@@ -104,6 +110,7 @@ class AuthenticationScreen extends StatelessWidget {
                           ),
                         ),
                       ),
+                      // Sign Up Button
                       SizedBox(
                         width: double.maxFinite,
                         child: Padding(
