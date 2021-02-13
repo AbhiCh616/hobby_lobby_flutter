@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hobby_lobby_flutter/components/authentication/logic/functions.dart';
+import 'package:hobby_lobby_flutter/components/authentication/logic/user.dart';
 import 'package:hobby_lobby_flutter/components/authentication/screens/AuthenticationScreen.dart';
 
 class Feed extends StatelessWidget {

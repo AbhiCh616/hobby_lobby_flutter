@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:hobby_lobby_flutter/components/authentication/logic/user.dart';
 import 'package:hobby_lobby_flutter/components/authentication/logic/validators.dart';
 import 'dart:math' as math;
 
+import 'package:hobby_lobby_flutter/components/feed/feed.dart';
+
 class PasswordScreen extends StatefulWidget {
+  final String email;
+  final String username;
+
+  PasswordScreen(this.email, this.username);
+
   @override
   _PasswordScreenState createState() => _PasswordScreenState();
 }
@@ -27,6 +35,20 @@ class _PasswordScreenState extends State<PasswordScreen> {
     setState(() {
       showPassword = !showPassword;
     });
+  }
+
+  signUp() async {
+    await createUser(widget.email, password, widget.username);
+
+    if (await isLoggedIn()) {
+      Navigator.pushAndRemoveUntil(
+        context,
+        PageRouteBuilder(
+          pageBuilder: (_, __, ___) => Feed(),
+        ),
+        ModalRoute.withName('/'),
+      );
+    }
   }
 
   @override
@@ -108,7 +130,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
                     child: SizedBox(
                       width: 500,
                       child: TextButton(
-                        onPressed: validatePassword(password) ? () {} : null,
+                        onPressed: validatePassword(password) ? signUp : null,
                         child: Text(
                           'SIGN UP',
                           style: TextStyle(fontSize: 16, color: Colors.white),

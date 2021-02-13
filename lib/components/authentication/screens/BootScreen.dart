@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hobby_lobby_flutter/animations/FadeAnimation.dart';
-import 'package:hobby_lobby_flutter/components/authentication/logic/functions.dart';
+import 'package:hobby_lobby_flutter/components/authentication/logic/user.dart';
 import 'package:hobby_lobby_flutter/components/authentication/screens/AuthenticationScreen.dart';
 import 'package:hobby_lobby_flutter/components/authentication/animated_illustrations/TwoPeopleSeatingIllustration.dart';
 import 'package:hobby_lobby_flutter/components/feed/feed.dart';

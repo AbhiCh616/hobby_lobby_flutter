@@ -11,10 +11,11 @@ class SignupScreen extends StatefulWidget {
 
 class _SignupScreenState extends State<SignupScreen> {
   final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  final usernameController = TextEditingController();
 
   bool isEmailCorrect = false;
-  bool isUsernameCorrect = true;
+  bool isUsernameCorrect = false;
+  bool isButtonEnabled = false;
 
   @override
   void initState() {
@@ -22,12 +23,13 @@ class _SignupScreenState extends State<SignupScreen> {
 
     // Start listening to changes.
     emailController.addListener(validate);
+    usernameController.addListener(validate);
   }
 
   @override
   void dispose() {
     emailController.dispose();
-    passwordController.dispose();
+    usernameController.dispose();
     super.dispose();
   }
 
@@ -46,6 +48,16 @@ class _SignupScreenState extends State<SignupScreen> {
         isEmailCorrect = !isEmailCorrect;
       });
     }
+
+    if (isUsernameCorrect != validateUsername(usernameController.text)) {
+      setState(() {
+        isUsernameCorrect = !isUsernameCorrect;
+      });
+    }
+
+    setState(() {
+      isButtonEnabled = isEmailCorrect && isUsernameCorrect;
+    });
   }
 
   goToPasswordScreen() {
@@ -53,7 +65,8 @@ class _SignupScreenState extends State<SignupScreen> {
       Navigator.push(
         context,
         PageRouteBuilder(
-          pageBuilder: (_, __, ___) => PasswordScreen(),
+          pageBuilder: (_, __, ___) =>
+              PasswordScreen(emailController.text, usernameController.text),
         ),
       );
     }
@@ -146,7 +159,7 @@ class _SignupScreenState extends State<SignupScreen> {
                               padding:
                                   const EdgeInsets.only(top: 20, bottom: 50),
                               child: TextFormField(
-                                controller: passwordController,
+                                controller: usernameController,
                                 decoration: InputDecoration(
                                   filled: true,
                                   fillColor: Colors.grey[100],
@@ -162,6 +175,12 @@ class _SignupScreenState extends State<SignupScreen> {
                                     ),
                                     borderRadius: BorderRadius.circular(10),
                                   ),
+                                  suffixIcon: isUsernameCorrect
+                                      ? Icon(
+                                          Icons.done,
+                                          color: Colors.green,
+                                        )
+                                      : null,
                                 ),
                               ),
                             ),
@@ -169,14 +188,17 @@ class _SignupScreenState extends State<SignupScreen> {
                             SizedBox(
                               width: double.maxFinite,
                               child: TextButton(
-                                onPressed: goToPasswordScreen,
+                                onPressed:
+                                    isButtonEnabled ? goToPasswordScreen : null,
                                 child: Text(
                                   'SIGN UP',
                                   style: TextStyle(
                                       fontSize: 16, color: Colors.white),
                                 ),
                                 style: TextButton.styleFrom(
-                                    backgroundColor: Colors.green,
+                                    backgroundColor: isButtonEnabled
+                                        ? Colors.green
+                                        : Colors.grey,
                                     padding: EdgeInsets.symmetric(vertical: 20),
                                     shape: RoundedRectangleBorder(
                                         borderRadius:

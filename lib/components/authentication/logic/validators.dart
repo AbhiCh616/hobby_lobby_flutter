@@ -9,7 +9,11 @@ bool validateEmail(String email) {
 }
 
 bool validateUsername(String username) {
-  return true;
+  if (username.length > 4) {
+    return true;
+  }
+
+  return false;
 }
 
 bool validatePassword(String password) {
